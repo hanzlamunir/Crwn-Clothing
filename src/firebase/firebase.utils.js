@@ -12,16 +12,12 @@ const config = {
   measurementId: "G-8F9PY4190H",
 };
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
+export const createUserProfileDocument = async (userAuth, additionaldata) => {
   if (!userAuth) return;
-
-  // console.log(firestore.doc(`users/${userAuth.uid}`));
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
   const snapShot = await userRef.get();
-
-  // console.log(snapShot);
 
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
@@ -32,7 +28,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData,
+        ...additionaldata,
       });
     } catch (error) {
       console.log("error creating user", error.message);
