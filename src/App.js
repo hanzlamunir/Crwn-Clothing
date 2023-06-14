@@ -31,6 +31,7 @@ class App extends React.Component {
 
         userRef.onSnapshot((snapShot) => {
           setCurrentUser({
+            // this.setState({
             id: snapShot.id,
             ...snapShot.data(),
           });
@@ -49,6 +50,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* <Header currentUser={this.state.currentUser} /> */}
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -69,9 +71,12 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
+const mapStateToProps = ({ user }) => {
+  console.log("user", user);
+  return {
+    currentUser: user.currentUser,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
